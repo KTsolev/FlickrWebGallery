@@ -1,0 +1,57 @@
+.photo-tile {
+  display: flex;
+  flex-direction: column;
+  color: #5e6266;
+  flex: 1;
+  padding: 5%;
+  border: 1px red solid;
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  &--inner {
+    background-color: #ededed;
+  }
+}
+
+.image-info {
+  display: flex;
+  flex-direction: column;
+  border: 2px green solid;
+}
+
+.image__description {
+  padding: 20px;
+  font-size: 16px;
+  text-align: justify;
+}
+
+.image__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 18px;
+  border: 2px yellow solid;
+}
+
+.header__title,
+.header__author,
+.image__description a{
+  font-size: 18px;
+  color: #2d4d69;
+}
+
+.header__title:visited,
+.header__author:visited,
+.image__description a:visited{
+  color: #cf7310;
+}
+
+.header__title:hover,
+.header__author:hover,
+.image__description a:hover{
+  color: #cf7310;
+}

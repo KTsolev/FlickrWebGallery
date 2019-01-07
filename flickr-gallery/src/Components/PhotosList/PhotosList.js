@@ -17,12 +17,17 @@ class PhotosList extends Component {
   _getPhotos() {
     this.setState({ isLoading: true });
     let url = 'https://api.flickr.com/services/rest/?api_key=3d66ed3090ab3c9ccb3d9271aafd25ab';
-    let params = `&method=flickr.photos.search&format=json&safe_search=1&tags=safe&privacy_filter=1&nojsoncallback=1&per_page=10&page=1`;
+    let params = `&method=flickr.photos.search&format=json&safe_search=1&tags=safe&privacy_filter=1&extras=url_o&nojsoncallback=1&per_page=15&page=1`;
 
     axios
     .get(`${url}${params}`)
     .then(data => {
       let jsonData = JSON.parse(JSON.stringify(data));
+      const photos = jsonData.data.photos.photo;
+      this.state.photos = photos.filter((photo) => {
+        if (photo.url_o)
+        return photo;
+      });
 
       jsonData.data.photos.photo.map(photo => {
         this._getPhotosData(photo.id);
@@ -39,14 +44,19 @@ class PhotosList extends Component {
     .get(`${url}${params}`)
     .then(data => {
       let jsonData = JSON.parse(JSON.stringify(data));
-      this.state.photos.push({
-            id: jsonData.data.photo.id,
-            title: jsonData.data.photo.title,
-            owner: jsonData.data.photo.owner,
-            description: jsonData.data.photo.description,
-            tags: jsonData.data.photo.tags,
-            url: jsonData.data.photo.urls.url,
+      this.state.photos.map((item) => {
+
+        if (item.id === jsonData.data.photo.id) {
+          return Object.assign(item, {
+            description: jsonData.data.photo.description._content,
+            title: jsonData.data.photo.title._content,
+            tags: jsonData.data.photo.tags.tag,
+            owner: jsonData.data.photo.owner.username,
+            ownerUrl: `https://www.flickr.com/people/${jsonData.data.photo.owner.nsid}`,
+            pageUrl: jsonData.data.photo.urls.url[0]._content,
           });
+        }
+      });
       this.setState({ isLoading: false });
     })
     .catch(error => this.setState({ error, isLoading: false }));

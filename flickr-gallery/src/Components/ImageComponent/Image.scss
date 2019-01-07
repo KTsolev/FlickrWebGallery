@@ -1,0 +1,39 @@
+.iron-image-container {
+  display: flex;
+  flex: 2;
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+}
+
+.iron-image-preload {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.iron-image-loaded {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.iron-image-fade-in {
+  opacity: 1;
+}
+
+.iron-image-fade-out {
+  opacity: 0;
+}
