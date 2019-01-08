@@ -10,15 +10,23 @@ class PhotoTile extends Component {
   constructor(props) {
     super(props);
 
-    this.removeTags = this.removeTags.bind(this);
+    this.state = {
+      expanded: false,
+    };
+
+    this._removeTags = this._removeTags.bind(this);
+    this._toggleExpand = this._toggleExpand.bind(this);
   }
 
-  removeTags(elem) {
-    const tagToRemove = elem.target.parentNode.childNodes[0].innerText;
-    console.log(elem.target.parentNode);
-    console.log(tagToRemove);
+  _removeTags(event) {
+    const tagToRemove = event.target.parentNode.childNodes[0].innerText;
     this.props.photo.tags = this.props.photo.tags.filter(tag => tag.raw !== tagToRemove);
     this.forceUpdate();
+  }
+
+  _toggleExpand(event) {
+    this.setState({ expanded: !this.state.expanded });
+    event.target.parentNode.classList.toggle('photo-tile__tags--epxanded', this.state.expanded);
   }
 
   render() {
@@ -30,11 +38,13 @@ class PhotoTile extends Component {
             <div className="image__header">
               <a href={this.props.photo.pageUrl}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="header__title">
                 {this.props.photo.title}
               </a>
               <a href={this.props.photo.ownerUrl}
                target="_blank"
+               rel="noopener noreferrer"
                className="header__author">
                by {this.props.photo.owner}
               </a>
@@ -43,11 +53,20 @@ class PhotoTile extends Component {
             <ReactSafeHtml html={this.props.photo.description} />
           </div>
           <div className="photo-tile__tags">
-            <span>Tags:</span>
+            <span className="tags__label">Tags:</span>
             {this.props.photo.tags ?
-              this.props.photo.tags.map((item, index) =>
-              <Tag key={index} tagName={item.raw} iconClickHandler={this.removeTags} />)
+              this.props.photo.tags.map((tag, index) =>
+              <Tag
+              key={index}
+              tagName={tag.raw}
+              iconClickHandler={this._removeTags} />)
               : 'no tags'}
+            {this.props.photo.tags && this.props.photo.tags.length > 4 ?
+              <span
+                className="tags__expand-button"
+                onClick={this._toggleExpand}>
+                . . .
+                </span> : null}
           </div>
         </div>
       </div>

@@ -5,11 +5,14 @@ class Image extends Component {
 
   constructor(props) {
     super(props);
-    this.ironImageHd = null;
 
-    this.setLoadedImgtRef = element => {
-      this.ironImageHd = element;
-    };
+    this.ironImageHd = null;
+    this.preloadImg = null;
+
+    this._setLoadedImgtRef = element => this.ironImageHd = element;
+
+    this._setPreloadImgtRef = element => this.preloadImg = element;
+
   }
 
   render() {
@@ -17,7 +20,7 @@ class Image extends Component {
       <div className="iron-image-container">
         <div
           className="iron-image-loaded"
-          ref={this.setLoadedImgtRef}>
+          ref={this._setLoadedImgtRef}>
           <img
             src={this.props.srcLoaded}
             style={{ display: 'none' }}
@@ -27,11 +30,14 @@ class Image extends Component {
                 `background-image: url('${this.props.srcLoaded}')`
               );
               this.ironImageHd.classList.add('iron-image-fade-in');
+              this.preloadImg.classList.add('iron-image-fade-out');
             }}
+
             alt='user-img' />
         </div>
         <div
           className="iron-image-preload"
+          ref={this._setPreloadImgtRef}
           style={{ backgroundImage: `url('${this.props.srcPreload}')` }}>
         </div>
       </div>

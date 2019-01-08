@@ -13,8 +13,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
+  opacity: 1;
+  transition: opacity 1s ease;
 }
 
 .iron-image-loaded {
@@ -24,7 +26,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 1s ease;
