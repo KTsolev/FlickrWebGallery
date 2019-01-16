@@ -1,15 +1,25 @@
-.list-items {
+.list-header {
   display: flex;
-  flex-direction: column;
-  max-width: 750px;
+  margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
 }
+
+.list-items {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
 .error-message {
   display: inline;
   position: fixed;
   color: #c23400;
   background-color: #fff;
+  word-wrap: break-word;
   padding: 10px;
   text-align: center;
 }

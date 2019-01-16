@@ -2,16 +2,19 @@
   display: flex;
   flex-direction: column;
   color: #5e6266;
-  flex: 1;
-  padding: 5%;
+  padding: 10px;
+  width: 265px;
+  min-height: 365px;
+  margin: 20px;
 
   &__tags {
     display: flex;
-    position: relative;
     flex-wrap: wrap;
-    border: 1px solid #000;
-    height: 35px;
-    width: 100%;
+    flex-basis: 20%;
+    justify-content: space-around;
+    border: 1px solid #5e6266;
+    height: 50px;
+    width: 90%;
     overflow-y: hidden;
     padding: 15px 5px;
     transition: height 1s ease;
@@ -54,8 +57,9 @@
 }
 
 .image__description {
+  display: flex;
   padding: 20px 5px;
-  font-size: 16px;
+  font-size: 12px;
   text-align: justify;
 }
 
@@ -73,13 +77,18 @@
 }
 
 .header__title {
-  font-size: 18px;
+  font-size: 12px;
 }
 
 .header__author {
-  font-size: 14px;
+  font-size: 12px;
 }
 
+.text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 .header__title:visited,
 .header__author:visited,
